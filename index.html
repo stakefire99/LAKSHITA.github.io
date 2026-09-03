@@ -37,7 +37,8 @@
     /* LAYOUT */
     section { padding: 88px 48px; max-width: 1100px; margin: 0 auto; }
     .section-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--lavender); margin-bottom: 12px; }
-    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(26px, 4vw, 40px); line-height: 1.2; color: var(--text); margin-bottom: 44px; }
+    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(26px, 4vw, 40px); line-height: 1.2; color: var(--text); margin-bottom: 14px; }
+    .projects-intro { font-size: 14px; color: var(--text-muted); max-width: 700px; line-height: 1.7; margin-bottom: 34px; }
     .section-divider { width: 100%; height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
 
     /* HERO */
@@ -126,11 +127,13 @@
     .skill-tag:hover { background: var(--lavender-light); border-color: var(--lavender); color: #7B5EA7; }
 
     /* PROJECTS */
-    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 22px; }
-    .project-card { background: white; border: 1.5px solid var(--border); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; transition: all 0.2s; position: relative; overflow: hidden; }
-    .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; align-items: stretch; }
+    .project-card { background: white; border: 1.5px solid var(--border); border-radius: 18px; padding: 26px; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; position: relative; overflow: hidden; min-width: 0; }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--border); }
     .project-card.featured::before { background: linear-gradient(90deg, var(--lavender), var(--pink)); }
-    .project-card:hover { border-color: var(--lavender); box-shadow: 0 8px 32px var(--shadow); transform: translateY(-3px); }
+    .project-card.featured { border-color: #E5DCF0; }
+    .project-card:hover { border-color: var(--lavender); box-shadow: 0 10px 30px var(--shadow); transform: translateY(-3px); }
+    .project-card.featured:hover { box-shadow: 0 12px 34px rgba(191,162,219,0.22); }
     .project-status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 100px; margin-bottom: 14px; align-self: flex-start; }
     .status-live { background: #EDF5F0; color: #3D7050; }
     .status-progress { background: #FFF8E7; color: #B08A0A; }
@@ -143,6 +146,12 @@
     .project-features li::before { content: '·'; color: var(--lavender); font-size: 18px; line-height: 0; }
     .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; margin-top: auto; }
     .stack-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; background: var(--cream); border: 1px solid var(--border); color: var(--text-muted); padding: 3px 9px; border-radius: 6px; }
+    .projects-subheading { grid-column: 1 / -1; font-family: 'DM Serif Display', serif; font-size: 22px; margin: 30px 0 -2px; color: var(--text); padding-top: 8px; border-top: 1px solid var(--border); }
+    .value-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .value-card { background: white; border: 1.5px solid var(--border); border-radius: 18px; padding: 24px; }
+    .value-icon { font-size: 24px; margin-bottom: 12px; }
+    .value-card h3 { font-family: 'DM Serif Display', serif; font-size: 18px; margin-bottom: 8px; }
+    .value-card p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
     .project-links { display: flex; gap: 8px; flex-wrap: wrap; }
     .project-link { font-size: 13px; font-weight: 500; padding: 8px 16px; border-radius: 8px; transition: all 0.15s; display: inline-flex; align-items: center; gap: 6px; }
     .project-link.live { background: var(--lavender); color: white; }
@@ -174,7 +183,10 @@
 
     /* GITHUB */
     .github-section { background: white; border: 1.5px solid var(--border); border-radius: 22px; padding: 36px; }
-    .github-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+    .github-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .github-cta h3 { font-family: 'DM Serif Display', serif; font-size: 21px; margin-bottom: 7px; }
+    .github-cta p { font-size: 13px; color: var(--text-muted); line-height: 1.65; max-width: 650px; }
+
     .github-header h3 { font-family: 'DM Serif Display', serif; font-size: 20px; }
     .github-link { font-size: 13px; font-weight: 600; color: var(--lavender); }
     .github-link:hover { text-decoration: underline; }
@@ -228,10 +240,17 @@
       .hero-art { width: 100%; }
       .snapshot-grid { grid-template-columns: 1fr; }
       .github-repos { grid-template-columns: 1fr; }
-      .resume-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .resume-grid, .value-grid { grid-template-columns: 1fr; }
       .opportunity-banner { padding: 16px 20px; flex-direction: column; align-items: flex-start; }
       .exp-header { flex-direction: column; gap: 8px; }
+      .github-cta { flex-direction: column; align-items: flex-start; }
     }
+    .section-intro { max-width: 720px; margin: -6px 0 28px; color: var(--text-muted); }
+    .footer-links { margin-top: 8px; display: flex; justify-content: center; gap: 10px; font-size: 13px; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--text); }
+    .resume-download { cursor: pointer; }
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
 </head>
@@ -260,11 +279,11 @@
       <p class="hero-sub">MCA Data Analytics · Jain University, Delhi · 2026</p>
       <div class="hero-roles">
         <span class="hero-role">Data Analyst</span>
-        <span class="hero-role">BI Analyst</span>
-        <span class="hero-role">Associate Analyst</span>
+        <span class="hero-role">Business Intelligence</span>
+        <span class="hero-role">Analytics & AI</span>
       </div>
       <p class="hero-tagline">
-        MCA Data Analytics student with hands-on internship experience in data analysis and Python development. Skilled in Power BI, SQL, Python, and building AI-powered tools that turn raw data into meaningful decisions.
+        MCA Data Analytics graduate with hands-on internship experience across data analysis and Python development. I use SQL, Python, Power BI, and AI to turn raw data into dashboards, insights, and practical tools that support better decisions.
       </p>
       <div class="hero-buttons">
         <a href="#projects" class="btn btn-primary">
@@ -275,11 +294,11 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Download Resume
         </a>
-        <a href="https://github.com/stakefire99" target="_blank" class="btn btn-ghost">
+        <a href="https://github.com/stakefire99" target="_blank" rel="noopener" class="btn btn-ghost">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.43 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.81 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0 1 12 5.8c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.82.57C20.57 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z"/></svg>
           GitHub
         </a>
-        <a href="https://www.linkedin.com/in/lakshita-047439224/" target="_blank" class="btn btn-ghost">
+        <a href="https://www.linkedin.com/in/lakshita-047439224/" target="_blank" rel="noopener" class="btn btn-ghost">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z"/></svg>
           LinkedIn
         </a>
@@ -325,7 +344,7 @@
         </svg>
       </div>
       <div class="stat-pills">
-        <div class="stat-pill"><strong>4</strong> Live Apps</div>
+        <div class="stat-pill"><strong>5</strong> Live Apps</div>
         <div class="stat-pill"><strong>2</strong> Internships</div>
         <div class="stat-pill"><strong>3</strong> Certifications</div>
       </div>
@@ -355,10 +374,10 @@
     <div class="section-title">Who I Am</div>
     <div class="snapshot-grid">
       <div class="snapshot-left">
-        <p>I'm <strong>Lakshita</strong> — a fresher and MCA Data Analytics student at Jain University, Delhi, graduating in 2026.</p>
-        <p>I have hands-on internship experience in data analysis and Python development, and I've independently built and deployed four AI-powered analytics applications that are live and accessible today.</p>
-        <p>My strengths sit at the intersection of data, dashboards, and problem-solving. I work well with both technical teams and non-technical stakeholders, and I'm comfortable turning messy datasets into clean, actionable insights.</p>
-        <p>I'm actively seeking entry-level roles in Data Analytics, Business Intelligence, or Reporting where I can contribute from day one.</p>
+        <p>I'm <strong>Lakshita</strong> — an MCA Data Analytics graduate building at the intersection of <strong>data, technology, and business</strong>.</p>
+        <p>I enjoy turning raw or messy information into clean analysis, dashboards, and practical tools. My work spans SQL and Python analytics, Power BI reporting, machine learning, and AI-powered applications.</p>
+        <p>Alongside internship experience in data analysis and Python development, I've independently built projects that take an idea from data and logic to an interactive, usable product.</p>
+        <p>I'm now looking for an entry-level opportunity in <strong>Data Analytics, Business Intelligence, MIS/Reporting, or analytics-focused Python</strong> where I can contribute, learn quickly, and solve real business problems.</p>
       </div>
       <div class="snapshot-right">
         <div class="snapshot-card">
@@ -378,8 +397,8 @@
         <div class="snapshot-card">
           <div class="snapshot-icon">🚀</div>
           <div>
-            <h4>4 Deployed Applications</h4>
-            <p>ApexF1, RetentionIQ, TalentPulse AI, and AI Resume Analyzer — all live on Streamlit Cloud</p>
+            <h4>5 Live Applications</h4>
+            <p>GrowLift, ApexF1, RetentionIQ, TalentPulse AI, and AI Resume Analyzer — live and publicly accessible</p>
           </div>
         </div>
         <div class="snapshot-card">
@@ -398,29 +417,8 @@
   <section id="experience">
     <div class="section-label">Work History</div>
     <div class="section-title">Experience</div>
+    <p class="section-intro">A mix of analytics, Python development, and business-facing experience — with a focus on turning information into useful outputs.</p>
     <div class="experience-list">
-
-      <div class="exp-card">
-        <div class="exp-header">
-          <div class="exp-title-block">
-            <h3>Data Analysis Intern</h3>
-            <div class="exp-company">Cognizant Technologies</div>
-          </div>
-          <span class="exp-period">Mar 2026 – Apr 2026</span>
-        </div>
-        <ul class="exp-bullets">
-          <li>Cleaned and preprocessed datasets using Python (Pandas, NumPy), improving data quality for downstream reporting and analysis.</li>
-          <li>Performed exploratory data analysis and visualized trends using Matplotlib and Seaborn to surface actionable business insights.</li>
-          <li>Produced summary reports and dashboards that directly supported stakeholder decision-making.</li>
-        </ul>
-        <div class="exp-tags">
-          <span class="exp-tag">Python</span>
-          <span class="exp-tag">Pandas</span>
-          <span class="exp-tag">EDA</span>
-          <span class="exp-tag">Data Visualization</span>
-          <span class="exp-tag">Reporting</span>
-        </div>
-      </div>
 
       <div class="exp-card">
         <div class="exp-header">
@@ -431,15 +429,36 @@
           <span class="exp-period">Feb 2026 – Ongoing</span>
         </div>
         <ul class="exp-bullets">
-          <li>Building Python-based solutions including data pipelines and analytical scripts for real-world business problems.</li>
-          <li>Working with Pandas, NumPy, and REST API integrations; developing skills in clean code practices and collaborative development.</li>
-          <li>Debugging and optimizing scripts to improve performance and code reliability.</li>
+          <li>Build Python-based solutions including data pipelines and analytical scripts for real-world business problems.</li>
+          <li>Work with Pandas, NumPy, REST APIs, and databases while developing clean, maintainable workflows.</li>
+          <li>Debug and optimize scripts with attention to data accuracy, reliability, and performance.</li>
         </ul>
         <div class="exp-tags">
           <span class="exp-tag">Python</span>
-          <span class="exp-tag">Data Pipelines</span>
-          <span class="exp-tag">REST APIs</span>
+          <span class="exp-tag">Pandas</span>
           <span class="exp-tag">NumPy</span>
+          <span class="exp-tag">REST APIs</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-title-block">
+            <h3>Data Analysis Intern</h3>
+            <div class="exp-company">Cognizant Technologies</div>
+          </div>
+          <span class="exp-period">Mar 2026 – Apr 2026</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Cleaned and structured datasets using Python and Pandas, preparing data for analysis and reporting workflows.</li>
+          <li>Performed exploratory analysis and visualization to identify trends, patterns, and business-relevant findings.</li>
+          <li>Produced analytical summaries and visual outputs to communicate findings clearly to stakeholders.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Python</span>
+          <span class="exp-tag">Pandas</span>
+          <span class="exp-tag">EDA</span>
+          <span class="exp-tag">Reporting</span>
         </div>
       </div>
 
@@ -452,17 +471,18 @@
           <span class="exp-period">Jul 2024 – Sep 2024</span>
         </div>
         <ul class="exp-bullets">
-          <li>Achieved the company's first overseas sale within the joining period, demonstrating strong analytical thinking and stakeholder communication.</li>
-          <li>Used data-driven insights to identify opportunities and build pipelines through structured outreach and follow-up.</li>
+          <li>Identified prospects, managed outreach and follow-ups, and contributed to opportunity analysis across the sales pipeline.</li>
+          <li>Achieved the company's first overseas sale within the joining period through independent prospecting and full-cycle execution.</li>
+          <li>Translated client needs into structured proposals, strengthening stakeholder communication and commercial decision-making.</li>
         </ul>
         <div class="exp-tags">
+          <span class="exp-tag">Market Research</span>
           <span class="exp-tag">Stakeholder Communication</span>
-          <span class="exp-tag">Business Development</span>
-          <span class="exp-tag">Data-Driven Decision Making</span>
+          <span class="exp-tag">Lead Generation</span>
         </div>
       </div>
 
-      <div class="exp-card">
+      <div class="exp-card exp-card-compact">
         <div class="exp-header">
           <div class="exp-title-block">
             <h3>Content Writer</h3>
@@ -471,12 +491,12 @@
           <span class="exp-period">Jul 2023 – Sep 2023</span>
         </div>
         <ul class="exp-bullets">
-          <li>Produced technical and creative content — a skill that now shapes how I write documentation and present analytical findings to stakeholders.</li>
+          <li>Produced research-driven technical and creative content, building a foundation in documentation and clear communication.</li>
         </ul>
         <div class="exp-tags">
+          <span class="exp-tag">Research</span>
           <span class="exp-tag">Technical Writing</span>
           <span class="exp-tag">Documentation</span>
-          <span class="exp-tag">Research</span>
         </div>
       </div>
 
@@ -488,60 +508,52 @@
   <section id="skills">
     <div class="section-label">What I Work With</div>
     <div class="section-title">Skills & Tools</div>
+    <p class="section-intro">A practical toolkit spanning analytics, business intelligence, applied AI, and the technical tools I use to turn analysis into usable outputs.</p>
     <div class="skills-grid">
       <div class="skill-card">
-        <div class="skill-card-header">
-          <div class="skill-icon purple">📊</div>
-          <h3>Data Analytics</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">Pandas</span>
-          <span class="skill-tag">NumPy</span>
-          <span class="skill-tag">SQL</span>
-          <span class="skill-tag">Excel</span>
-          <span class="skill-tag">Power BI</span>
-        </div>
+        <div class="skill-card-header"><div class="skill-icon purple">📊</div><h3>Data & Analytics</h3></div>
+        <div class="skill-tags"><span class="skill-tag">Python</span><span class="skill-tag">SQL</span><span class="skill-tag">Pandas</span><span class="skill-tag">NumPy</span><span class="skill-tag">EDA</span><span class="skill-tag">Data Cleaning</span><span class="skill-tag">Statistical Analysis</span><span class="skill-tag">Predictive Analytics</span></div>
       </div>
       <div class="skill-card">
-        <div class="skill-card-header">
-          <div class="skill-icon yellow">📉</div>
-          <h3>Business Intelligence</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">DAX</span>
-          <span class="skill-tag">Data Modeling</span>
-          <span class="skill-tag">Reporting</span>
-          <span class="skill-tag">Dashboard Design</span>
-          <span class="skill-tag">KPI Tracking</span>
-        </div>
+        <div class="skill-card-header"><div class="skill-icon yellow">📈</div><h3>BI & Reporting</h3></div>
+        <div class="skill-tags"><span class="skill-tag">Power BI</span><span class="skill-tag">DAX</span><span class="skill-tag">Power Query</span><span class="skill-tag">Advanced Excel</span><span class="skill-tag">Data Modeling</span><span class="skill-tag">KPI Reporting</span><span class="skill-tag">Dashboard Design</span></div>
       </div>
       <div class="skill-card">
-        <div class="skill-card-header">
-          <div class="skill-icon pink">🛠️</div>
-          <h3>Development & AI</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">Streamlit</span>
-          <span class="skill-tag">Flask</span>
-          <span class="skill-tag">REST APIs</span>
-          <span class="skill-tag">OpenAI API</span>
-          <span class="skill-tag">NLP</span>
-          <span class="skill-tag">Git</span>
-        </div>
+        <div class="skill-card-header"><div class="skill-icon pink">🤖</div><h3>AI & Machine Learning</h3></div>
+        <div class="skill-tags"><span class="skill-tag">Scikit-learn</span><span class="skill-tag">Machine Learning</span><span class="skill-tag">NLP</span><span class="skill-tag">OpenAI API</span><span class="skill-tag">Prompt Engineering</span><span class="skill-tag">AI Applications</span></div>
       </div>
       <div class="skill-card">
-        <div class="skill-card-header">
-          <div class="skill-icon sage">🌟</div>
-          <h3>Professional</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="skill-tag">Documentation</span>
-          <span class="skill-tag">Research</span>
-          <span class="skill-tag">Communication</span>
-          <span class="skill-tag">Problem Solving</span>
-          <span class="skill-tag">Stakeholder Management</span>
-        </div>
+        <div class="skill-card-header"><div class="skill-icon sage">🛠️</div><h3>Tools & Development</h3></div>
+        <div class="skill-tags"><span class="skill-tag">Streamlit</span><span class="skill-tag">REST APIs</span><span class="skill-tag">Flask</span><span class="skill-tag">MySQL</span><span class="skill-tag">PostgreSQL</span><span class="skill-tag">SQLite</span><span class="skill-tag">Git/GitHub</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT I BRING -->
+  <div class="section-divider"></div>
+  <section id="what-i-bring">
+    <div class="section-label">How I Add Value</div>
+    <div class="section-title">What I Bring</div>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-icon">📊</div>
+        <h3>Analytics</h3>
+        <p>Turn raw and messy data into clean analysis, KPIs, trends, and actionable business insights.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📈</div>
+        <h3>BI & Reporting</h3>
+        <p>Build dashboards and reporting views that make performance easy to understand and act on.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤖</div>
+        <h3>AI & Predictive Analytics</h3>
+        <p>Apply machine learning and AI to practical problems such as churn, recommendations, and intelligent tools.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">💻</div>
+        <h3>Technical Execution</h3>
+        <p>Build usable applications around analytical ideas — from Python and Streamlit to full-stack products.</p>
       </div>
     </div>
   </section>
@@ -551,6 +563,7 @@
   <section id="projects">
     <div class="section-label">What I've Built</div>
     <div class="section-title">Featured Projects</div>
+    <p class="projects-intro">A selection of analytics, BI, AI, and product projects — with live applications where you can explore the work yourself.</p>
     <div class="projects-grid">
 
       <!-- DEPLOYED: RetentionIQ -->
@@ -683,7 +696,7 @@
       </div>
 
       <!-- NEW: DataFlow Pro -->
-      <div class="project-card featured">
+      <div class="project-card">
         <span class="project-status status-repo">◆ &nbsp;GitHub</span>
         <h3>DataFlow Pro</h3>
         <p class="project-problem">High-performance Python data processing project demonstrating concurrency, parallelism, caching, testing, and the Strategy design pattern through an interactive dashboard.</p>
@@ -706,7 +719,7 @@
       </div>
 
       <!-- NEW: Data Analytics Case Studies -->
-      <div class="project-card featured">
+      <div class="project-card">
         <span class="project-status status-repo">◆ &nbsp;GitHub</span>
         <h3>Data Analytics Case Studies</h3>
         <p class="project-problem">A multi-domain analytics portfolio covering retail, healthcare, sports, finance, and e-commerce using exploratory analysis, segmentation, prediction, and statistical techniques.</p>
@@ -727,6 +740,8 @@
           <a href="https://github.com/stakefire99/data-analysis-portfolio" target="_blank" class="project-link github">GitHub</a>
         </div>
       </div>
+
+      <div class="projects-subheading">More Work</div>
 
       <!-- NEW: Productivity AI Analytics System -->
       <div class="project-card">
@@ -836,32 +851,12 @@
   <div class="section-divider"></div>
   <section id="certifications">
     <div class="section-label">Credentials</div>
-    <div class="section-title">Certifications</div>
+    <div class="section-title">Certifications & Programs</div>
+    <p class="section-intro">Selected programs that complement my hands-on project and internship experience.</p>
     <div class="certs-grid">
-      <div class="cert-card">
-        <div class="cert-icon">🏦</div>
-        <div>
-          <h4>Quantitative Research Virtual Experience</h4>
-          <p>JPMorgan Chase & Co. · Forage</p>
-          <span class="cert-badge">Finance & Quant Analytics</span>
-        </div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">📋</div>
-        <div>
-          <h4>Data Analytics Program</h4>
-          <p>Deloitte</p>
-          <span class="cert-badge">Data Analytics</span>
-        </div>
-      </div>
-      <div class="cert-card">
-        <div class="cert-icon">🎓</div>
-        <div>
-          <h4>Post Graduate Certificate — Data Science</h4>
-          <p>Internshala</p>
-          <span class="cert-badge">Data Science</span>
-        </div>
-      </div>
+      <div class="cert-card"><div class="cert-icon">🏦</div><div><h4>Quantitative Research Virtual Experience</h4><p>JPMorgan Chase & Co. · Forage</p><span class="cert-badge">Finance & Quant Analytics</span></div></div>
+      <div class="cert-card"><div class="cert-icon">📋</div><div><h4>Data Analytics Program</h4><p>Deloitte</p><span class="cert-badge">Data Analytics</span></div></div>
+      <div class="cert-card"><div class="cert-icon">🎓</div><div><h4>Post Graduate Certificate — Data Science</h4><p>Internshala</p><span class="cert-badge">Data Science</span></div></div>
     </div>
   </section>
 
@@ -870,30 +865,31 @@
   <section id="journey" style="max-width:700px">
     <div class="section-label">My Story</div>
     <div class="section-title">How I Got Here</div>
+    <p class="section-intro">A quick look at how my background moved from software and business exposure into data analytics, BI, and applied AI.</p>
     <div class="timeline">
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-year">2021</div>
-        <div class="timeline-title">Started BCA</div>
-        <p class="timeline-desc">GL Bajaj Institute of Management & Technology. Built foundations in programming, databases, and software development.</p>
+        <div class="timeline-year">2021–2024</div>
+        <div class="timeline-title">BCA · Computer Applications</div>
+        <p class="timeline-desc">Built foundations in programming, databases, and software development at GL Bajaj Institute of Management & Technology.</p>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-year">2023</div>
         <div class="timeline-title">Content Writer · Zuraverse</div>
-        <p class="timeline-desc">Developed research and communication skills — now shapes how I write documentation and present analytical findings.</p>
+        <p class="timeline-desc">Developed research, documentation, and communication skills that continue to shape how I present technical and analytical work.</p>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-year">2024</div>
-        <div class="timeline-title">Business Development Executive · SIXPL</div>
-        <p class="timeline-desc">Achieved the company's first overseas sale. Built skills in stakeholder communication and data-driven decision making.</p>
+        <div class="timeline-title">Business Development · SIXPL</div>
+        <p class="timeline-desc">Gained direct exposure to customers, prospect research, sales pipelines, and business decision-making.</p>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-year">2024</div>
-        <div class="timeline-title">Started MCA · Data Analytics · Jain University</div>
-        <p class="timeline-desc">Shifted full focus to data science, Python, SQL, and BI — and started building projects seriously.</p>
+        <div class="timeline-year">2024–2026</div>
+        <div class="timeline-title">MCA · Data Analytics</div>
+        <p class="timeline-desc">Moved deeper into data science, Python, SQL, BI, and analytical problem-solving at Jain University.</p>
         <div class="timeline-tags">
           <span class="timeline-tag">Data Analytics</span>
           <span class="timeline-tag">Power BI</span>
@@ -902,22 +898,22 @@
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-year">Feb 2026</div>
-        <div class="timeline-title">Python Development Intern · The Developers Arena</div>
-        <p class="timeline-desc">Building Python applications, data pipelines, and scripts for real-world business problems.</p>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-year">Mar 2026</div>
-        <div class="timeline-title">Data Analysis Intern · Cognizant Technologies</div>
-        <p class="timeline-desc">Applied Python, Pandas, and visualization tools in an enterprise environment. Produced dashboards that supported stakeholder decisions.</p>
+        <div class="timeline-year">2026</div>
+        <div class="timeline-title">Data Analysis + Python Development</div>
+        <p class="timeline-desc">Applied analytics in an internship environment while building Python applications, data pipelines, and practical tools.</p>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Python</span>
+          <span class="timeline-tag">Pandas</span>
+          <span class="timeline-tag">Reporting</span>
+        </div>
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
         <div class="timeline-year">Now</div>
-        <div class="timeline-title">4 Live Deployed Applications</div>
-        <p class="timeline-desc">RetentionIQ, TalentPulse AI, ApexF1, and AI Resume Analyzer — all live. Actively seeking full-time Data Analyst or BI Analyst roles.</p>
+        <div class="timeline-title">Building & Looking Ahead</div>
+        <p class="timeline-desc">Five live applications and a growing portfolio of analytics, BI, AI, and data-driven projects — now focused on full-time Data Analyst, BI, and analytics opportunities.</p>
         <div class="timeline-tags">
+          <span class="timeline-tag">5 Live Apps</span>
           <span class="timeline-tag">Open to Work</span>
           <span class="timeline-tag">2026 Graduate</span>
         </div>
@@ -929,64 +925,21 @@
   <div class="section-divider"></div>
   <section id="github">
     <div class="section-label">Open Source</div>
-    <div class="section-title">Featured Repositories</div>
+    <div class="section-title">Explore More on GitHub</div>
     <div class="github-section">
-      <div class="github-header">
-        <h3>On GitHub</h3>
-        <a href="https://github.com/stakefire99" target="_blank" class="github-link">View all repositories →</a>
-      </div>
-      <div class="github-repos">
-        <div class="repo-card">
-          <div class="repo-name">RetentionIQ-AI</div>
-          <div class="repo-desc">Customer churn prediction platform — RandomForest on IBM Telco dataset</div>
-          <div class="repo-meta">
-            <span class="repo-lang"><span class="lang-dot" style="background:#3776AB"></span> Python</span>
-            <span class="repo-live">● Live</span>
-          </div>
+      <div class="github-cta">
+        <div>
+          <h3>More projects, experiments & code</h3>
+          <p>Explore my GitHub for additional analytics case studies, Python projects, AI experiments, dashboards, and development work.</p>
         </div>
-        <div class="repo-card">
-          <div class="repo-name">TalentPulse-AI</div>
-          <div class="repo-desc">Job market intelligence dashboard — skills, trends, salary benchmarks</div>
-          <div class="repo-meta">
-            <span class="repo-lang"><span class="lang-dot" style="background:#3776AB"></span> Python</span>
-            <span class="repo-live">● Live</span>
-          </div>
-        </div>
-        <div class="repo-card">
-          <div class="repo-name">ApexF1-Intelligence-Platform</div>
-          <div class="repo-desc">F1 analytics and ML race prediction — driver stats, lap times, standings</div>
-          <div class="repo-meta">
-            <span class="repo-lang"><span class="lang-dot" style="background:#3776AB"></span> Python</span>
-            <span class="repo-live">● Live</span>
-          </div>
-        </div>
-        <div class="repo-card">
-          <div class="repo-name">AI-Resume-Analyzer</div>
-          <div class="repo-desc">ATS scoring and AI-powered resume feedback tool</div>
-          <div class="repo-meta">
-            <span class="repo-lang"><span class="lang-dot" style="background:#3776AB"></span> Python</span>
-            <span class="repo-live">● Live</span>
-          </div>
-        </div>
-        <div class="repo-card">
-          <div class="repo-name">WALMART-SALES-DASHBOARD</div>
-          <div class="repo-desc">Power BI dashboard for sales trends, KPIs, and regional performance</div>
-          <div class="repo-meta">
-            <span class="repo-lang"><span class="lang-dot" style="background:#F2C811"></span> Power BI</span>
-          </div>
-        </div>
-        <div class="repo-card">
-          <div class="repo-name">FEDEX-LOGISTICS-SQL-ANALYSIS</div>
-          <div class="repo-desc">End-to-end SQL analytics — delivery delays, routing, warehouse performance</div>
-          <div class="repo-meta">
-            <span class="repo-lang"><span class="lang-dot" style="background:#e38c00"></span> SQL</span>
-          </div>
-        </div>
+        <a href="https://github.com/stakefire99" target="_blank" rel="noopener" class="btn btn-primary">
+          View GitHub →
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- RESUME -->
+    <!-- RESUME -->
   <div class="section-divider"></div>
   <section id="resume">
     <div class="section-label">Download</div>
@@ -1041,23 +994,24 @@
     <div class="contact-section">
       <div class="section-label">Let's Talk</div>
       <div class="section-title">Let's Connect</div>
-      <p>Open to full-time roles, remote opportunities, and collaborations. I'd love to hear from you.</p>
+      <p>I'm open to full-time roles and early-career opportunities where data, business thinking, and technology come together. If you're hiring or would like to talk about a project, I'd love to connect.</p>
       <div class="contact-availability">
         <span class="avail-tag">✓ Full-Time Roles</span>
         <span class="avail-tag">✓ Remote Opportunities</span>
         <span class="avail-tag">✓ Entry-Level Analyst Positions</span>
         <span class="avail-tag">✓ Internships</span>
+        <span class="avail-tag">✓ Analytics & BI</span>
       </div>
       <div class="contact-links">
         <a href="mailto:lak03shita@gmail.com" class="contact-link primary">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
           lak03shita@gmail.com
         </a>
-        <a href="https://github.com/stakefire99" target="_blank" class="contact-link">
+        <a href="https://github.com/stakefire99" target="_blank" rel="noopener" class="contact-link">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.43 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.08-.73.08-.73 1.2.09 1.83 1.23 1.83 1.23 1.07 1.83 2.81 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0 1 12 5.8c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.69.82.57C20.57 21.8 24 17.3 24 12 24 5.37 18.63 0 12 0z"/></svg>
           GitHub
         </a>
-        <a href="https://www.linkedin.com/in/lakshita-047439224/" target="_blank" class="contact-link">
+        <a href="https://www.linkedin.com/in/lakshita-047439224/" target="_blank" rel="noopener" class="contact-link">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.35-1.85 3.58 0 4.24 2.36 4.24 5.43v6.31zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zm1.78 13.02H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z"/></svg>
           LinkedIn
         </a>
@@ -1067,6 +1021,7 @@
 
   <footer>
     <p>Designed & built with 🤍 by <span>Lakshita</span> · 2026</p>
+    <div class="footer-links"><a href="https://github.com/stakefire99" target="_blank" rel="noopener">GitHub</a><span>·</span><a href="https://www.linkedin.com/in/lakshita-047439224/" target="_blank" rel="noopener">LinkedIn</a><span>·</span><a href="mailto:lak03shita@gmail.com">Email</a></div>
   </footer>
 
   <script>
